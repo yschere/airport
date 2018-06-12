@@ -7,29 +7,57 @@ using namespace std;
 
 // Default constructor
 Runway::Runway() : mID("RUN123"), mLength(789), mRunwayType(TAKEOFF),
-  mDelay(15673), mMaxQueueSize(5) {}
+  mDelay(15673), mMaxQueueSize(5) {
+    addLandingFlight("A63");
+    addLandingFlight("B99");
+    addLandingFlight("C12");
+    addLandingFlight("D8I");
+    addTakeoffFlight("Z9");
+    addTakeoffFlight("Y03");
+    addTakeoffFlight("X1X");
+    addTakeoffFlight("W00");
+    addTakeoffFlight("V55");
+    addTakeoffFlight("U92");
+    setCurrentFlight();
+}
 
 // Constructor: object created with value input for runway
-Runway::Runway(string ID, float length, bool type, int delay,
+Runway::Runway(string ID, float length, runwayType type, int delay,
   int maxQueueSize) : mID(ID), mLength(length), mRunwayType(type),
-  mDelay(delay), mMaxQueueSize(maxQueueSize) {}
+  mDelay(delay), mMaxQueueSize(maxQueueSize) {
+    addLandingFlight("A63");
+    addLandingFlight("B99");
+    addLandingFlight("C12");
+    addLandingFlight("D8I");
+    addTakeoffFlight("Z9");
+    addTakeoffFlight("Y03");
+    addTakeoffFlight("X1X");
+    addTakeoffFlight("W00");
+    addTakeoffFlight("V55");
+    addTakeoffFlight("U92");
+    setCurrentFlight();
+}
 
 // Returns ID of a runway
 string Runway::getID() const { return mID; }
 
 // Sets the current flight for a runway
-void Runway::setCurrentFlight() {}
+void Runway::setCurrentFlight() {
+  if ( mRunwayType == TAKEOFF ) {
+    mCurrentFlight = nextTakeoffFlight();
+  } else {
+    mCurrentFlight = nextLandingFlight();
+  }
+}
 
 // Gets the current flight for a runway
-string Runway::getCurrentFlight() {
-
-}
+string Runway::getCurrentFlight() const { return mCurrentFlight; }
 
 // Returns the length of a runway
 float Runway::getLength() const { return mLength; }
 
 // Sets the type of runway
-void Runway::setRunwayType( const bool type ) { mRunwayType = type; }
+void Runway::setRunwayType( const runwayType type ) { mRunwayType = type; }
 
 // Returns the type of runway
 bool Runway::getRunwayType() const { return mRunwayType; }
@@ -47,7 +75,7 @@ queue<string> Runway::getTakeoffFlights() const { return mTakeoffList; }
 queue<string> Runway::getLandingFlights() const { return mLandingList; }
 
 // Adds flight to takeoff queue
-bool Runway::addTakeoffFlight( string flightID const ) {
+bool Runway::addTakeoffFlight( string const flightID ) {
   if ( mTakeoffList.size() < mMaxQueueSize ) {
     mTakeoffList.push(flightID);
     return true;
@@ -56,19 +84,25 @@ bool Runway::addTakeoffFlight( string flightID const ) {
 }
 
 // Adds flight to landing queue
-bool Runway::addLandingFlight( string flightID const ) {
-  if ( mTakeoffList.size() < mMaxQueueSize ) {
+bool Runway::addLandingFlight( string const flightID ) {
+  if ( mLandingList.size() < mMaxQueueSize ) {
     mLandingList.push(flightID);
     return true;
   }
   return false;
 }
 
-// Removes flight from takeoff queue
-string Runway::popTakeoffFlight() { return mTakeoffList.pop(); }
+// Gets next takeoff flight from queue
+string Runway::nextTakeoffFlight() { return mTakeoffList.front(); }
+
+// Gets next takeoff flight from queue
+string Runway::nextLandingFlight() { return mLandingList.front(); }
 
 // Removes flight from takeoff queue
-string Runway::popLandingFlight() { return mLandingList.pop(); }
+void Runway::popTakeoffFlight() { mTakeoffList.pop(); }
+
+// Removes flight from takeoff queue
+void Runway::popLandingFlight() { mLandingList.pop(); }
 
 // Switches runway type between takeoff and landing
 void Runway::changeRunwayType() {

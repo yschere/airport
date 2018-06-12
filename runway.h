@@ -17,20 +17,23 @@ public:
   Runway();
 
 // Constructor: object created with value input for runway
-  Runway(string ID, float length, bool type, int delay,
+  Runway(string ID, float length, runwayType type, int delay,
     int maxQueueSize);
 
 // Returns ID of a runway
   string getID() const;
 
 // Sets the current flight for a runway
-  void setCurrentFlight( const string currentFlight );
+  void setCurrentFlight();
+
+// Returns the current flight for a runway
+  string getCurrentFlight() const;
 
 // Returns the length of a runway
   float getLength() const;
 
 // Sets the type of runway
-  void setRunwayType( const bool type );
+  void setRunwayType( const runwayType type );
 
 // Sets the type of runway
   bool getRunwayType() const;
@@ -48,16 +51,22 @@ public:
   queue<string> getLandingFlights() const;
 
 // Add flight to takeoff queue
-  bool addTakeoffFlight( string flightID const );
+  bool addTakeoffFlight( string const flightID );
 
 // Add flight to landing queue
-  bool addLandingFlight( string flightID const );
+  bool addLandingFlight( string const flightID );
+
+// Gets next takeoff flight from queue
+  string nextTakeoffFlight();
+
+// Gets next takeoff flight from queue
+  string nextLandingFlight();
 
 // Removes flight from takeoff queue
-  string popTakeoffFlight();
+  void popTakeoffFlight();
 
 // Removes flight from takeoff queue
-  string popLandingFlight();
+  void popLandingFlight();
 
 // Switch runway type between takeoff and landing
   void changeRunwayType();
@@ -69,12 +78,12 @@ public:
   ~Runway();
 
 protected:
-  string mID const;
-  float mLength const; // runway length
+  string const mID;
+  float const mLength; // runway length
   runwayType mRunwayType; //takeoff vs landing
+  string mCurrentFlight; //current flight using the runway
   int mDelay; // seconds between switch mType if need be
-  int mMaxQueueSize const; //max num flights queued to take off
-  vector<string> mFlights; //list of gse IDs for gate
+  uint const mMaxQueueSize; //max num flights queued to take off
   queue<string> mTakeoffList; //queue of flights taking off from this runway
   queue<string> mLandingList; //queue of flights landing on this runway
 };
