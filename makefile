@@ -8,8 +8,11 @@ CFLAGS = -g -Wall
 TARGET = a.out
 default: $(TARGET)
 
-$(TARGET): vehicle.o plane.o gse.o main.o
-	$(CC) $(CFLAGS) -o $(TARGET) main.o plane.o gse.o vehicle.o
+$(TARGET): runway.o vehicle.o plane.o gse.o main.o
+	$(CC) $(CFLAGS) -o $(TARGET) main.o plane.o gse.o vehicle.o runway.o
+
+runway.o: runway.cpp runway.h
+	$(CC) $(CFLAGS) -c runway.cpp
 
 vehicle.o: vehicle.cpp vehicle.h
 	$(CC) $(CFLAGS) -c vehicle.cpp
@@ -22,6 +25,6 @@ gse.o: gse.cpp gse.h vehicle.h
 
 main.o: main.cpp plane.h vehicle.h gse.h
 	$(CC) $(CFLAGS) -c main.cpp
-	
+
 clean:
 	$(RM) $(TARGET) *.o *~

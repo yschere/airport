@@ -1,5 +1,5 @@
-#ifndef _GATE_H
-#define _GATE_H
+#ifndef _RUNWAY_H
+#define _RUNWAY_H
 #include <iostream>
 #include <string>
 #include <vector>
@@ -10,11 +10,15 @@ class Runway {
 
 public:
 
+// Ground Support Equipment enumeration type
+  enum runwayType {TAKEOFF, LANDING};
+
 // Default constructor
-  runway();
+  Runway();
 
 // Constructor: object created with value input for runway
-  runway();
+  Runway(string ID, float length, bool type, int delay,
+    int maxQueueSize);
 
 // Returns ID of a runway
   string getID() const;
@@ -26,10 +30,10 @@ public:
   float getLength() const;
 
 // Sets the type of runway
-  void setType( const bool type );
+  void setRunwayType( const bool type );
 
 // Sets the type of runway
-  bool getType() const;
+  bool getRunwayType() const;
 
 // Returns the type of runway
   int getDelay() const;
@@ -62,12 +66,12 @@ public:
   void print() const;
 
 // Destructor of the gate object
-  ~runway();
+  ~Runway();
 
 protected:
   string mID const;
   float mLength const; // runway length
-  bool mType; //takeoff vs land
+  runwayType mRunwayType; //takeoff vs landing
   int mDelay; // seconds between switch mType if need be
   int mMaxQueueSize const; //max num flights queued to take off
   vector<string> mFlights; //list of gse IDs for gate
