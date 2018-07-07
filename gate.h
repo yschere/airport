@@ -10,10 +10,10 @@ class Gate {
 public:
 
 // Default constructor
-  gate();
+  Gate();
 
 // Constructor: object created with value input for gate
-  gate(string ID, string currentFlight, int attachTime, int detachTime,
+  Gate(string ID, string currentFlight, int attachTime, int detachTime,
     vector<string> supportVehicles);
 
 // Returns ID of a gate
@@ -37,11 +37,17 @@ public:
 // Returns the list of GSE vehicles of a gate
   vector<string> getSupportVehicles() const;
 
+// Add GSE vehicle to a gate's GSE vehicle list
+  void addSupportVehicle( const string supportVehicle );
+
+// Remove GSE vehicle from a gate's GSE vehicle list
+  void removeSupportVehicle( const string supportVehicle );
+
 // Returns the value of each member variable
   void print() const;
 
 // Destructor of the gate object
-  ~gate();
+  ~Gate();
 
 protected:
   string mID;

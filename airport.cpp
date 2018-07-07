@@ -35,7 +35,7 @@ vector<float> Airport::getLocation() const { return mLocation; }
 void Airport::print() const {
   cout << "Airport" << endl;
   cout << "ID: " << getID() << endl;
-  cout << "Location: (" << getLocation()[0] << ',' << getLocation()[1] << ')' << endl ;
+  cout << "Location: (" << getLocation()[0] << ',' << getLocation()[1] << ")" << endl ;
   cout << "Runways:";
   vector<string> r = getRunways();
   for (vector<string>::iterator it = r.begin(); it != r.end(); it++) {

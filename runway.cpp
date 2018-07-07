@@ -62,6 +62,9 @@ void Runway::setRunwayType( const runwayType type ) { mRunwayType = type; }
 // Returns the type of runway
 bool Runway::getRunwayType() const { return mRunwayType; }
 
+// Sets the type of runway
+void Runway::setDelay( const int delay ) { mDelay = delay; }
+
 // Returns the delay time of runway
 int Runway::getDelay() const { return mDelay; }
 

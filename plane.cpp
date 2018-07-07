@@ -53,5 +53,5 @@ void Plane::print() const {
 
 // Destructor of the plane object
 Plane::~Plane(){
-  cout << "plane destructor" << endl;
+  cout << "Plane destructor" << endl;
 }

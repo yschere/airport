@@ -92,7 +92,7 @@ void Vehicle::print() const {
 
 // Destruct the Vehicle object
 Vehicle::~Vehicle(){
-  cout << "vehicle destructor" << endl;
+  cout << "Vehicle destructor" << endl;
 }
 
 /*create objects

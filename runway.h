@@ -38,6 +38,9 @@ public:
 // Sets the type of runway
   bool getRunwayType() const;
 
+// Sets the type of runway
+  void setDelay( const int delay );
+
 // Returns the type of runway
   int getDelay() const;
 

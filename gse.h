@@ -47,7 +47,7 @@ public:
 protected:
   const float mPushWeightCapacity; //lbs
   const float mPullWeightCapacity; //lbs
-  const eType mType; // BUS, TUG, FUELTRUCK, or CARGOLOADER
+  const eType mGSEType; // BUS, TUG, FUELTRUCK, or CARGOLOADER
 };
 
 #endif

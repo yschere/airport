@@ -1,19 +1,20 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include "gse.h"
 #include "gate.h"
 
 using namespace std;
 
 // Default constructor
-Gate::gate() : mID("XYZ"), mCurrentFlight("ABC123"),
-  mAttachTime(12345), mDetachTime(9821), mSupportVehicles({"C","D","E"})
+Gate::Gate() : mID("XYZ"), mCurrentFlight("ABC123"),
+  mAttachTime(12345), mDetachTime(9821), mSupportVehicles({"C","D","E"}) {}
 
 // Constructor: object created with value input for gate
-Gate::gate(string ID, string currentFlight, int attachTime, int detachTime,
+Gate::Gate(string ID, string currentFlight, int attachTime, int detachTime,
   vector<string> supportVehicles) : mID(ID), mCurrentFlight(currentFlight),
     mAttachTime(attachTime), mDetachTime(detachTime),
-    mSupportVehicles(supportVehicles)
+    mSupportVehicles(supportVehicles) {}
 
 // Returns ID of a gate
 string Gate::getID() const { return mID; }
@@ -36,6 +37,20 @@ void Gate::setSupportVehicles( const vector<string> supportVehicles ) { mSupport
 // Returns the list of GSE vehicles of a gate
 vector<string> Gate::getSupportVehicles() const { return mSupportVehicles; }
 
+// Add GSE vehicle to a gate's GSE vehicle list
+void Gate::addSupportVehicle( const string supportVehicle ) { mSupportVehicles.push_back(supportVehicle); }
+
+// Remove GSE vehicle from a gate's GSE vehicle list
+void Gate::removeSupportVehicle( const string supportVehicle ) {
+  for (vector<string>::iterator it = mSupportVehicles.begin(); it != mSupportVehicles.end(); it++) {
+    cout << *it << endl;
+    if (*it == supportVehicle) {
+      mSupportVehicles.erase(it);
+      break;
+    }
+  }
+}
+
 // Returns the value of each member variable
 void Gate::print() const {
   cout << "Gate" << endl;
@@ -52,6 +67,6 @@ void Gate::print() const {
 }
 
 // Destructor of the gate object
-Gate::~gate() {
+Gate::~Gate() {
   cout << "Gate destructor" << endl;
 }
